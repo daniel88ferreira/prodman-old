@@ -48,6 +48,8 @@ class App extends Component {
         return <div>Loading...</div>;
       }
     }
+
+
     return (
       <Container>
         <Row>
@@ -56,7 +58,7 @@ class App extends Component {
         <Row>
           <Col>
           body
-          {body}
+          {body()}
           </Col>
         </Row>
 

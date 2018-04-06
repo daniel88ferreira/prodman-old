@@ -51,19 +51,17 @@ class App extends Component {
 
 
     return (
-      <Container>
-        <Row>
-          <Col>NavBar goes here! <NavBar action={this.props.changeText} /> </Col>
-        </Row>
-        <Row>
-          <Col>
-          body
-          {body()}
-          </Col>
-        </Row>
-
+        <Container >
+          <Row>
+            <Col> <NavBar/> </Col>
+          </Row>
+          <Row>
+            <Col>
+              <p/>
+              {body()}
+            </Col>
+          </Row>
         </Container>
-
     );
 
   }

@@ -1,14 +1,30 @@
-import React from 'react'
-
-import { 
-    Button,
+import React from 'react';
+import {
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
 } from 'reactstrap';
 
-
-export default (props) => {
+export default class TopBar extends React.Component {
+  render() {
+    console.log(Navbar.propTypes)
     return (
-      <div>
-      <Button color="danger" onClick={props.action}>Click me!</Button>
-      </div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">ProdMan</NavbarBrand>
+          <Nav className="navbar mr-auto">
+            <NavItem>
+              <NavLink href="/">Ordens</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Produtos</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Stocks</NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
     );
-  };
+  }
+}

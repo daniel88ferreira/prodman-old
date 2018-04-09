@@ -9,4 +9,4 @@ class MessageSerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'code', 'name')
+        fields = ('id', 'code', 'name', 'color', 'size')

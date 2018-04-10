@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 // Actions
-import { list } from '../actions/list'
+import { products } from '../actions/api'
 // Reducers
-import { allObjects } from '../reducers'
+import {  products } from '../reducers'
 
 import { Row, Col, Button, Table } from 'reactstrap';
 

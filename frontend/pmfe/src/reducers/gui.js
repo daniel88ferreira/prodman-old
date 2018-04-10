@@ -1,4 +1,4 @@
-import * as changeview from '../actions/gui_actions'
+import * as changeview from '../actions/gui'
 
 const initialState = {
   view: 1
@@ -15,4 +15,4 @@ export default (state = initialState, action) => {
   }
 }
 
-export const currentView = (state) => state.view
+export const mainView = (state) => state.view

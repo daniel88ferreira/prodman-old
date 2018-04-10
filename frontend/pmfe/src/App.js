@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 // Actions
 import { echo } from './actions/echo'
-import { list } from './actions/list'
-import { changeview } from './actions/gui_actions'
+import { fetch_products } from './actions/api'
+import { changeview } from './actions/gui'
 
 import {
   serverMessage,
-  allObjects,
-  currentView
+  products,
+  mainView
 } from './reducers'
 
 import { Container, Row, Col } from 'reactstrap'
@@ -23,7 +23,7 @@ import Stocks from './components/Stocks'
 class App extends Component {
   componentDidMount() {
     this.props.fetchMessage('BATATAS!')
-    this.props.fetchObjects()
+    this.props.fe()
   }
 
   navBarClick(btn_clicked) {
@@ -46,7 +46,7 @@ class App extends Component {
     }
 
     const view = () => {
-      switch (this.props.view) {
+      switch (this.props.mainview) {
         case 1:
           return <Orders />;
         case 2:
@@ -61,7 +61,7 @@ class App extends Component {
     return (
       <Container >
         <Row>
-          <Col> <NavBar onClick={(i) => this.navBarClick(i)} active={this.props.view} /> </Col>
+          <Col> <NavBar onClick={(i) => this.navBarClick(i)} active={this.props.mainview} /> </Col>
         </Row>
         <br />
         <Row>
@@ -72,7 +72,7 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>CURRENT VIEW: {this.props.view} {body()}</Col>
+          <Col>CURRENT VIEW: {this.props.mainview} {body()}</Col>
         </Row>
       </Container>
     );
@@ -83,12 +83,12 @@ class App extends Component {
 export default connect(
   state => ({
     message: serverMessage(state),
-    objects: allObjects(state),
-    view: currentView(state)
+    products: products(state),
+    mainview: mainView(state)
   }),
   {
     fetchMessage: echo,
-    fetchObjects: list,
+    fetch_products: fetch_products,
     changeView: changeview
   }
 )(App)

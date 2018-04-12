@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 
 // Actions
 import { echo } from './actions/echo'
-import { fetch_products } from './actions/api'
-import { changeview } from './actions/gui'
+import { fetchProductsAll } from './actions/api'
+import { change_view } from './actions/gui'
 
 import {
   serverMessage,
-  products,
+  serverProducts,
   mainView
 } from './reducers'
 
@@ -23,22 +23,20 @@ import Stocks from './components/Stocks'
 class App extends Component {
   componentDidMount() {
     this.props.fetchMessage('BATATAS!')
-    this.props.fe()
+    this.props.fetchProductsAll()
   }
 
   navBarClick(btn_clicked) {
-    console.log("Button " + btn_clicked + " clicked!");
     this.props.changeView(btn_clicked);
   }
 
   render() {
-    console.log(this.props.objects);
-    const elems = this.props.objects.map(
+    const elems = this.props.serverProductsAll.map(
       (elem) => <li key={elem.id}> {elem.name}:{elem.code} </li>
     )
 
     const body = () => {
-      if (this.props.objects.length) {
+      if (this.props.serverProductsAll.length) {
         return <div> M: <b>{this.props.message}</b> {elems} </div>;
       } else {
         return <div>Loading...</div>;
@@ -46,7 +44,7 @@ class App extends Component {
     }
 
     const view = () => {
-      switch (this.props.mainview) {
+      switch (this.props.currentview) {
         case 1:
           return <Orders />;
         case 2:
@@ -61,7 +59,11 @@ class App extends Component {
     return (
       <Container >
         <Row>
-          <Col> <NavBar onClick={(i) => this.navBarClick(i)} active={this.props.mainview} /> </Col>
+          <Col>
+            <NavBar
+              onClick={(i) => this.navBarClick(i)}
+              active={this.props.currentview} />
+          </Col>
         </Row>
         <br />
         <Row>
@@ -72,7 +74,7 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>CURRENT VIEW: {this.props.mainview} {body()}</Col>
+          <Col>CURRENT VIEW: {this.props.currentview} {body()}</Col>
         </Row>
       </Container>
     );
@@ -83,12 +85,12 @@ class App extends Component {
 export default connect(
   state => ({
     message: serverMessage(state),
-    products: products(state),
-    mainview: mainView(state)
+    serverProductsAll: serverProducts(state),
+    currentview: mainView(state)
   }),
   {
     fetchMessage: echo,
-    fetch_products: fetch_products,
-    changeView: changeview
+    fetchProductsAll: fetchProductsAll,
+    changeView: change_view
   }
 )(App)

@@ -1,15 +1,16 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
+
 import auth, * as fromAuth from './auth.js'
 import echo, * as fromEcho from './echo.js'
-import products, * as fromApi from './api.js'
-import changeview, * as fromGui from './gui.js'
+import api, * as fromApi from './api.js'
+import gui, * as fromGui from './gui.js'
 
 export default combineReducers({
   auth: auth,
   echo: echo,
-  products: products,
-  view: changeview,
+  api: api,
+  gui: gui,
   router: routerReducer
 })
 
@@ -19,9 +20,12 @@ export const isAccessTokenExpired = state => fromAuth.isAccessTokenExpired(state
 export const refreshToken = state => fromAuth.refreshToken(state.auth)
 export const isRefreshTokenExpired = state => fromAuth.isRefreshTokenExpired(state.auth)
 export const authErrors = state => fromAuth.errors(state.auth)
+
+export const serverProductsAll = state => fromApi.serverProductsAll(state.api)
+
 export const serverMessage = state => fromEcho.serverMessage(state.echo)
-export const fetchProducts = state => fromApi.products(state.products)
-export const currentView = state => fromGui.currentView(state.view)
+
+export const mainView = state => fromGui.mainView(state.gui)
 
 export function withAuth (headers = {}) {
   return (state) => ({

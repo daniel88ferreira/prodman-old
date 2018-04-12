@@ -15,4 +15,4 @@ export default (state = initialState, action) => {
   }
 }
 
-export const products = (state) => state.products
+export const serverProductsAll = (state) => state.products

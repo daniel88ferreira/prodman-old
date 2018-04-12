@@ -5,7 +5,7 @@ export const FETCH_PRODUCTS_REQUEST = '@@api/FETCH_PRODUCTS_REQUEST'
 export const FETCH_PRODUCTS_SUCCESS = '@@api/FETCH_PRODUCTS_SUCCESS'
 export const FETCH_PRODUCTS_FAILURE = '@@api/FETCH_PRODUCTS_FAILURE'
 
-export const fetch_products = () => ({
+export const fetchProductsAll = () => ({
   [RSAA]: {
     endpoint: '/api/create/',
     method: 'GET',

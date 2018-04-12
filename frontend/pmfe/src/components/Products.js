@@ -2,16 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 // Actions
-import { products } from '../actions/api'
+import { fetchProductsAll } from '../actions/api'
 // Reducers
-import {  products } from '../reducers'
+import { serverProducts } from '../reducers'
 
-import { Row, Col, Button, Table } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Button,
+  Table
+} from 'reactstrap';
 
 
 class Products extends React.Component {
   render() {
-    const rows = this.props.objects.map((product) =>
+    const rows = this.props.serverProductsAll.map((product) =>
       <tr key={product.id}>
         <th scope="row">{product.code}</th>
         <td>{product.name}</td>
@@ -24,10 +29,13 @@ class Products extends React.Component {
       <div>
         <Row>
           <Col>
-            <Button color="primary" onClick={() => this.props.fetchObjects()}>Refresh</Button>
+            <Button color="primary"
+              onClick={() => this.props.fetchProductsAll()}>
+              Refresh
+            </Button>
           </Col>
         </Row>
-        <p/>
+        <p />
         <Row>
           <Col>
             <Table hover>
@@ -52,9 +60,9 @@ class Products extends React.Component {
 
 export default connect(
   state => ({
-    objects: allObjects(state),
+    serverProductsAll: serverProducts(state),
   }),
   {
-    fetchObjects: list,
+    fetchProductsAll: fetchProductsAll,
   }
 )(Products)
